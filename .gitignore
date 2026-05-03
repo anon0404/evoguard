@@ -5,5 +5,17 @@ __pycache__/
 .venv/
 venv/
 .DS_Store
-results/
 *.log
+
+# Keep paper artifacts
+!results/
+!results/tables/
+!results/tables/*.csv
+
+# Optionally include a few plots used in the paper
+!results/plots/
+!results/plots/*.png
+
+# Ignore bulky/generated experiment folders
+results/model_stack_simulations/
+results/neurogenetic/
