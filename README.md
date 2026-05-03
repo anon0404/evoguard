@@ -18,7 +18,7 @@ This repository accompanies the anonymized submission:
 ## System Overview
 
 <p align="center">
-  <img src="assets/evoguard_system.png" width="850"/>
+  <img src="evoguard_system.png" width="850"/>
   <br/>
   <em>EvoGuard models conversational safety as a layered guardrail architecture optimized through neurogenetic search.</em>
 </p>
@@ -70,25 +70,37 @@ The framework studies how different guardrail stacks should be composed around c
 ## Repository Structure
 
 ~~~text
-src/guardrail_gym/
-  benchmark/          scenario definitions and loading
-  controls/           guardrail primitive registry
-  eval/               simulation, metrics, coverage, complementarity
+main/src/guardrail_gym/
+  benchmark/          scenario definitions, expansion, and loading logic
+  controls/           guardrail primitive registry and control logic
+  eval/               simulation engine, metrics, coverage, complementarity
   search/             EvoGuard genotype, mutation, crossover, search, fitness
-  profiles/           deployment and model profiles
-  models/             optional adapters for real models
+  profiles/           deployment/environment profiles and configuration
+  models/             adapters and interfaces for real or simulated models
 
-examples/
+main/benchmark_data/
+  regulated_v2/       benchmark scenario datasets and structured inputs
+
+main/models_catalog/
+  model_catalog.yaml  definitions of supported models and capabilities
+
+main/environments/
+  deployment_profiles.yaml   environment and deployment configurations
+
+main/examples/
   benchmark.*.yaml
   search.*.yaml
   model_simulation_suite.yaml
 
-risk_ontology/
+main/risk_ontology/
   expanded_control_catalog.yaml
   guardrail_layers.yaml
   cognitive_roles.yaml
+  vulnerability_classes.yaml
+  canonical_taxonomy.yaml
+  control_coverage_matrix.yaml
 
-scripts/
+main/scripts/
   run_model_stack_simulations.py
   run_baseline_comparison.py
   export_evoguard_vs_baselines.py
@@ -98,9 +110,19 @@ scripts/
   run_operator_ablation.py
   run_complexity_escalation.py
 
-results/
+main/docs/
+  benchmark_spec.md
+  cards/              documentation for benchmark components and concepts
+
+main/tests/
+  test_benchmark_runner.py
+  test_benchmark_expansion.py
+  test_smoke.py
+
+main/results/
   tables/
   plots/
+
 ~~~
 
 ---
