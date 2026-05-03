@@ -1,150 +1,226 @@
-version: "0.2"
-
-# Scale: all priors normalized to [0, 1].
-# capability: public benchmark / model-card proxy where available.
-# safety_prior: initialization prior only; replace with 1 - Guardrails Gym violation_rate.
-# latency: relative latency burden, 0 = fastest, 1 = slowest.
-# cost: relative deployment/API cost burden, 0 = cheapest, 1 = most expensive.
-
+version: '0.2'
 model_groups:
-
   api_frontier:
-    - key: gpt_5_4
-      capability: 0.95        # source: OpenAI frontier model reports / public benchmark leaderboards; frontier reasoning/API class.
-      safety_prior: 0.84      # source: OpenAI system-card style safety prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.58           # source: frontier API model; higher reasoning latency.
-      cost: 0.85              # source: high API cost tier.
-      deployment_modes: [api_hosted]
-      quantization_profiles: [managed]
-
-    - key: gemini_3_1_pro_preview
-      capability: 0.95        # source: Gemini Pro public benchmark reports / Artificial Analysis-style aggregate rankings.
-      safety_prior: 0.82      # source: Google frontier hosted-model prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.60           # source: frontier Pro API class.
-      cost: 0.85              # source: high API cost tier.
-      deployment_modes: [api_hosted]
-      quantization_profiles: [managed]
-
-    - key: gpt_5_4_mini
-      capability: 0.82        # source: OpenAI mini model reports; lower-cost frontier-family proxy.
-      safety_prior: 0.80      # source: OpenAI hosted-model prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.34           # source: mini API model optimized for lower latency.
-      cost: 0.55              # source: medium API cost tier.
-      deployment_modes: [api_hosted]
-      quantization_profiles: [managed]
-
-    - key: gpt_4_1
-      capability: 0.78        # source: OpenAI GPT-4.1 release/model-card benchmark claims; strong coding/context model.
-      safety_prior: 0.78      # source: OpenAI API model prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.42           # source: hosted API model, medium latency burden.
-      cost: 0.55              # source: medium API cost tier.
-      deployment_modes: [api_hosted]
-      quantization_profiles: [managed]
-
+  - key: gpt_5_4
+    capability: 0.95
+    safety_prior: 0.84
+    latency: 0.58
+    cost: 0.85
+    deployment_modes:
+    - api_hosted
+    quantization_profiles:
+    - managed
+  - key: gemini_3_1_pro_preview
+    capability: 0.95
+    safety_prior: 0.82
+    latency: 0.6
+    cost: 0.85
+    deployment_modes:
+    - api_hosted
+    quantization_profiles:
+    - managed
+  - key: gpt_5_4_mini
+    capability: 0.82
+    safety_prior: 0.8
+    latency: 0.34
+    cost: 0.55
+    deployment_modes:
+    - api_hosted
+    quantization_profiles:
+    - managed
+  - key: gpt_5_5
+    provider: openai
+    api_model: gpt-5.5
+    capability: 0.96
+    safety_prior: 0.88
+    latency: 0.6
+    cost: 0.78
+    deployment_modes:
+    - api_hosted
+    quantization_profiles:
+    - managed
   api_fast_cost_optimized:
-    - key: gemini_2_5_flash
-      capability: 0.35        # source: public Gemini Flash benchmark aggregators; speed/cost optimized model.
-      safety_prior: 0.76      # source: Google hosted-model prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.22           # source: Flash family optimized for speed.
-      cost: 0.35              # source: medium/low API cost tier.
-      deployment_modes: [api_hosted]
-      quantization_profiles: [managed]
-
-    - key: mercury_2
-      capability: 0.55        # source: Mercury 2 public reports; benchmark coverage less standardized.
-      safety_prior: 0.70      # source: hosted reasoning-model prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.08           # source: Mercury 2 high-throughput / speed-oriented reports.
-      cost: 0.35              # source: medium API cost tier.
-      deployment_modes: [api_hosted]
-      quantization_profiles: [managed]
-
+  - key: gemini_2_5_flash
+    capability: 0.35
+    safety_prior: 0.76
+    latency: 0.22
+    cost: 0.35
+    deployment_modes:
+    - api_hosted
+    quantization_profiles:
+    - managed
+  - key: mercury_2
+    capability: 0.55
+    safety_prior: 0.7
+    latency: 0.08
+    cost: 0.35
+    deployment_modes:
+    - api_hosted
+    quantization_profiles:
+    - managed
   open_weight_large:
-    - key: nemotron_3_super_120b_a12b
-      capability: 0.60        # source: NVIDIA Nemotron public reports / benchmark aggregators; 120B A12B MoE.
-      safety_prior: 0.72      # source: open-weight reasoning model prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.62           # source: 120B total / 12B active MoE, high-capacity serving.
-      cost: 0.75              # source: high self-hosted GPU compute tier.
-      deployment_modes: [self_hosted, enterprise_gpu]
-      quantization_profiles: [bf16, fp8, int8]
-
-    - key: qwen3_next_80b_a3b
-      capability: 0.34        # source: Qwen Next public reports / benchmark aggregators; 80B A3B MoE.
-      safety_prior: 0.66      # source: open-weight Qwen prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.38           # source: 80B A3B sparse MoE, low active-parameter latency.
-      cost: 0.60              # source: high total-parameter self-hosted tier.
-      deployment_modes: [self_hosted, hosted_inference]
-      quantization_profiles: [bf16, fp8, int8]
-
-    - key: mistral_small_4
-      capability: 0.58        # source: Mistral Small 4 model card; 119B / 6.5B active MoE.
-      safety_prior: 0.72      # source: Mistral instruct/reasoning prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.45           # source: 6.5B active MoE, efficient despite large total size.
-      cost: 0.50              # source: medium self-hosted/API tier.
-      deployment_modes: [self_hosted, api_hosted]
-      quantization_profiles: [bf16, fp8, int8, int4]
-
+  - key: nemotron_3_super_120b_a12b
+    capability: 0.6
+    safety_prior: 0.72
+    latency: 0.62
+    cost: 0.75
+    deployment_modes:
+    - self_hosted
+    - enterprise_gpu
+    quantization_profiles:
+    - bf16
+    - fp8
+    - int8
+  - key: qwen3_next_80b_a3b
+    capability: 0.34
+    safety_prior: 0.66
+    latency: 0.38
+    cost: 0.6
+    deployment_modes:
+    - self_hosted
+    - hosted_inference
+    quantization_profiles:
+    - bf16
+    - fp8
+    - int8
+  - key: mistral_small_4
+    capability: 0.58
+    safety_prior: 0.72
+    latency: 0.45
+    cost: 0.5
+    deployment_modes:
+    - self_hosted
+    - api_hosted
+    quantization_profiles:
+    - bf16
+    - fp8
+    - int8
+    - int4
   open_weight_medium:
-    - key: qwen3_5_27b
-      capability: 0.70        # source: Qwen3.5 27B public benchmark aggregators.
-      safety_prior: 0.68      # source: Qwen instruct/reasoning prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.45           # source: 27B dense/self-hosted model.
-      cost: 0.50              # source: medium self-hosted compute tier.
-      deployment_modes: [self_hosted, enterprise_gpu]
-      quantization_profiles: [bf16, fp8, int8, int4]
-
-    - key: qwen3_5_35b_a3b
-      capability: 0.62        # source: Qwen3.5 35B A3B public benchmark aggregators.
-      safety_prior: 0.68      # source: Qwen MoE reasoning prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.34           # source: 35B A3B MoE, 3B active.
-      cost: 0.45              # source: medium hosted/self-hosted tier.
-      deployment_modes: [self_hosted, hosted_inference, enterprise_gpu]
-      quantization_profiles: [bf16, fp8, int8, int4]
-
-    - key: gemma_4_26b_a4b
-      capability: 0.52        # source: Google Gemma 4 model card / benchmark aggregators; 26B A4B sparse model.
-      safety_prior: 0.74      # source: Google Gemma instruct/safety-tuned prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.38           # source: 26B A4B sparse MoE.
-      cost: 0.45              # source: medium self-hosted compute tier.
-      deployment_modes: [self_hosted, enterprise_gpu]
-      quantization_profiles: [bf16, int8, int4]
-
-    - key: nemotron_3_nano_30b_a3b
-      capability: 0.22        # source: NVIDIA Nemotron Nano public reports / benchmark aggregators; 30B A3B sparse model.
-      safety_prior: 0.68      # source: open-weight instruct prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.35           # source: 30B A3B sparse MoE.
-      cost: 0.45              # source: medium self-hosted compute tier.
-      deployment_modes: [self_hosted, enterprise_gpu]
-      quantization_profiles: [bf16, fp8, int8, int4]
-
-    - key: nemotron_cascade_2_30b_a3b
-      capability: 0.25        # source: inferred from Nemotron 30B A3B family; verify with direct benchmark run.
-      safety_prior: 0.68      # source: inferred open-weight prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.42           # source: Cascade class assumed heavier than Nano; verify empirically.
-      cost: 0.50              # source: medium self-hosted compute tier.
-      deployment_modes: [self_hosted, enterprise_gpu]
-      quantization_profiles: [bf16, fp8, int8, int4]
-
+  - key: qwen3_5_27b
+    capability: 0.7
+    safety_prior: 0.68
+    latency: 0.45
+    cost: 0.5
+    deployment_modes:
+    - self_hosted
+    - enterprise_gpu
+    quantization_profiles:
+    - bf16
+    - fp8
+    - int8
+    - int4
+  - key: qwen3_5_35b_a3b
+    capability: 0.62
+    safety_prior: 0.68
+    latency: 0.34
+    cost: 0.45
+    deployment_modes:
+    - self_hosted
+    - hosted_inference
+    - enterprise_gpu
+    quantization_profiles:
+    - bf16
+    - fp8
+    - int8
+    - int4
+  - key: gemma_4_26b_a4b
+    capability: 0.52
+    safety_prior: 0.74
+    latency: 0.38
+    cost: 0.45
+    deployment_modes:
+    - self_hosted
+    - enterprise_gpu
+    quantization_profiles:
+    - bf16
+    - int8
+    - int4
+  - key: nemotron_3_nano_30b_a3b
+    capability: 0.22
+    safety_prior: 0.68
+    latency: 0.35
+    cost: 0.45
+    deployment_modes:
+    - self_hosted
+    - enterprise_gpu
+    quantization_profiles:
+    - bf16
+    - fp8
+    - int8
+    - int4
+  - key: nemotron_cascade_2_30b_a3b
+    capability: 0.25
+    safety_prior: 0.68
+    latency: 0.42
+    cost: 0.5
+    deployment_modes:
+    - self_hosted
+    - enterprise_gpu
+    quantization_profiles:
+    - bf16
+    - fp8
+    - int8
+    - int4
   edge_small:
-    - key: qwen3_4b
-      capability: 0.30        # source: Qwen3 4B public model-card / small-model benchmark proxy.
-      safety_prior: 0.64      # source: open-weight small instruct prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.20           # source: 4B edge/self-hosted model.
-      cost: 0.18              # source: low edge/self-hosted compute tier.
-      deployment_modes: [edge_device, self_hosted, enterprise_gpu]
-      quantization_profiles: [bf16, int8, int4]
-
-    - key: gemma_4_e4b
-      capability: 0.32        # source: Google Gemma 4 E4B model card / benchmark aggregators.
-      safety_prior: 0.70      # source: Google Gemma instruct/safety-tuned prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.20           # source: E4B edge-oriented model.
-      cost: 0.18              # source: low edge/self-hosted compute tier.
-      deployment_modes: [edge_device, self_hosted, enterprise_gpu]
-      quantization_profiles: [bf16, int8, int4]
-
-    - key: ministral_3_3b
-      capability: 0.18        # source: Ministral 3B public benchmark aggregators / Mistral small-model reports.
-      safety_prior: 0.62      # source: small Mistral instruct prior; replace with empirical Guardrails Gym violation rate.
-      latency: 0.14           # source: 3B edge-friendly model.
-      cost: 0.08              # source: very low edge/self-hosted compute tier.
-      deployment_modes: [edge_device, self_hosted]
-      quantization_profiles: [bf16, int8, int4]
+  - key: qwen3_4b
+    capability: 0.3
+    safety_prior: 0.64
+    latency: 0.2
+    cost: 0.18
+    deployment_modes:
+    - edge_device
+    - self_hosted
+    - enterprise_gpu
+    quantization_profiles:
+    - bf16
+    - int8
+    - int4
+  - key: gemma_4_e4b
+    capability: 0.32
+    safety_prior: 0.7
+    latency: 0.2
+    cost: 0.18
+    deployment_modes:
+    - edge_device
+    - self_hosted
+    - enterprise_gpu
+    quantization_profiles:
+    - bf16
+    - int8
+    - int4
+  - key: ministral_3_3b
+    capability: 0.18
+    safety_prior: 0.62
+    latency: 0.14
+    cost: 0.08
+    deployment_modes:
+    - edge_device
+    - self_hosted
+    quantization_profiles:
+    - bf16
+    - int8
+    - int4
+  api_fast_cost:
+  - key: gpt_5_4_mini
+    provider: openai
+    api_model: gpt-5.4-mini
+    capability: 0.86
+    safety_prior: 0.8
+    latency: 0.32
+    cost: 0.32
+    deployment_modes:
+    - api_hosted
+    quantization_profiles:
+    - managed
+  - key: gpt_5_4_nano
+    provider: openai
+    api_model: gpt-5.4-nano
+    capability: 0.76
+    safety_prior: 0.72
+    latency: 0.18
+    cost: 0.16
+    deployment_modes:
+    - api_hosted
+    quantization_profiles:
+    - managed

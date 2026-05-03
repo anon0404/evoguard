@@ -9,7 +9,7 @@ from guardrail_gym.models.factory import get_model_adapter
 BENCHMARK = "examples/benchmark.regulated.eval.yaml"
 OUT = "results/tables/real_multi_model_subset.json"
 MODELS = [
-    "gpt-4.1",
+    "gpt-5.5",
     "gemini-2.5-flash",
     "claude-sonnet-4-5",
 ]

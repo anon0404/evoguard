@@ -1,7 +1,7 @@
 from guardrail_gym.models.factory import get_model_adapter
 
 MODELS = [
-    "gpt-4.1",
+    "gpt-5.5",
     "gemini-2.5-flash",
     "claude-sonnet-4-5",
     "Qwen/Qwen3.5-27B",
