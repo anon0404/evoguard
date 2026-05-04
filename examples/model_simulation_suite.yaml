@@ -3,7 +3,7 @@ model_groups:
   api_frontier:
   - key: gpt_5_4
     capability: 0.95
-    safety_prior: 0.84
+    safety_prior: 0.86
     latency: 0.58
     cost: 0.85
     deployment_modes:
@@ -12,9 +12,15 @@ model_groups:
     - managed
     provider: openai
     api_model: gpt-5.4
+    reasoning_quality: 0.93
+    hallucination_rate: 0.08
+    jailbreak_susceptibility: 0.12
+    compliance_bias: 0.9
+    latency_factor: 1.1
+    cost_factor: 1.2
   - key: gemini_3_1_pro_preview
     capability: 0.95
-    safety_prior: 0.82
+    safety_prior: 0.85
     latency: 0.6
     cost: 0.85
     deployment_modes:
@@ -23,6 +29,12 @@ model_groups:
     - managed
     provider: google
     api_model: gemini-3.1-pro-preview
+    reasoning_quality: 0.93
+    hallucination_rate: 0.08
+    jailbreak_susceptibility: 0.13
+    compliance_bias: 0.89
+    latency_factor: 1.05
+    cost_factor: 1.05
   - key: gpt_5_5
     provider: openai
     api_model: gpt-5.5
@@ -34,21 +46,33 @@ model_groups:
     - api_hosted
     quantization_profiles:
     - managed
+    reasoning_quality: 0.96
+    hallucination_rate: 0.07
+    jailbreak_susceptibility: 0.1
+    compliance_bias: 0.92
+    latency_factor: 1.2
+    cost_factor: 1.35
   - key: claude_sonnet_4_5
     provider: anthropic
     api_model: claude-sonnet-4-5
     capability: 0.91
-    safety_prior: 0.84
+    safety_prior: 0.87
     latency: 0.55
     cost: 0.62
     deployment_modes:
     - api_hosted
     quantization_profiles:
     - managed
+    reasoning_quality: 0.92
+    hallucination_rate: 0.08
+    jailbreak_susceptibility: 0.12
+    compliance_bias: 0.91
+    latency_factor: 1.05
+    cost_factor: 1.1
   api_fast_cost_optimized:
   - key: gemini_2_5_flash
     capability: 0.35
-    safety_prior: 0.76
+    safety_prior: 0.78
     latency: 0.22
     cost: 0.35
     deployment_modes:
@@ -57,19 +81,31 @@ model_groups:
     - managed
     provider: google
     api_model: gemini-2.5-flash
+    reasoning_quality: 0.84
+    hallucination_rate: 0.13
+    jailbreak_susceptibility: 0.2
+    compliance_bias: 0.82
+    latency_factor: 0.55
+    cost_factor: 0.45
   - key: mercury_2
     capability: 0.55
-    safety_prior: 0.7
+    safety_prior: 0.79
     latency: 0.08
     cost: 0.35
     deployment_modes:
     - api_hosted
     quantization_profiles:
     - managed
+    reasoning_quality: 0.85
+    hallucination_rate: 0.13
+    jailbreak_susceptibility: 0.21
+    compliance_bias: 0.83
+    latency_factor: 0.5
+    cost_factor: 0.5
   open_weight_large:
   - key: nemotron_3_super_120b_a12b
     capability: 0.6
-    safety_prior: 0.72
+    safety_prior: 0.79
     latency: 0.62
     cost: 0.75
     deployment_modes:
@@ -79,9 +115,15 @@ model_groups:
     - bf16
     - fp8
     - int8
+    reasoning_quality: 0.91
+    hallucination_rate: 0.11
+    jailbreak_susceptibility: 0.22
+    compliance_bias: 0.8
+    latency_factor: 1.35
+    cost_factor: 1.05
   - key: qwen3_next_80b_a3b
     capability: 0.34
-    safety_prior: 0.66
+    safety_prior: 0.76
     latency: 0.38
     cost: 0.6
     deployment_modes:
@@ -91,9 +133,15 @@ model_groups:
     - bf16
     - fp8
     - int8
+    reasoning_quality: 0.89
+    hallucination_rate: 0.13
+    jailbreak_susceptibility: 0.26
+    compliance_bias: 0.78
+    latency_factor: 1.15
+    cost_factor: 0.95
   - key: mistral_small_4
     capability: 0.58
-    safety_prior: 0.72
+    safety_prior: 0.73
     latency: 0.45
     cost: 0.5
     deployment_modes:
@@ -104,10 +152,16 @@ model_groups:
     - fp8
     - int8
     - int4
+    reasoning_quality: 0.82
+    hallucination_rate: 0.17
+    jailbreak_susceptibility: 0.3
+    compliance_bias: 0.74
+    latency_factor: 0.75
+    cost_factor: 0.65
   open_weight_medium:
   - key: qwen3_5_27b
     capability: 0.7
-    safety_prior: 0.68
+    safety_prior: 0.7
     latency: 0.45
     cost: 0.5
     deployment_modes:
@@ -120,9 +174,15 @@ model_groups:
     - int4
     real_model_id: Qwen/Qwen2.5-0.5B-Instruct
     real_model_note: small local smoke-test substitute
+    reasoning_quality: 0.82
+    hallucination_rate: 0.18
+    jailbreak_susceptibility: 0.32
+    compliance_bias: 0.72
+    latency_factor: 0.8
+    cost_factor: 0.55
   - key: qwen3_5_35b_a3b
     capability: 0.62
-    safety_prior: 0.68
+    safety_prior: 0.71
     latency: 0.34
     cost: 0.45
     deployment_modes:
@@ -134,9 +194,15 @@ model_groups:
     - fp8
     - int8
     - int4
+    reasoning_quality: 0.84
+    hallucination_rate: 0.17
+    jailbreak_susceptibility: 0.31
+    compliance_bias: 0.73
+    latency_factor: 0.85
+    cost_factor: 0.6
   - key: gemma_4_26b_a4b
     capability: 0.52
-    safety_prior: 0.74
+    safety_prior: 0.72
     latency: 0.38
     cost: 0.45
     deployment_modes:
@@ -146,9 +212,15 @@ model_groups:
     - bf16
     - int8
     - int4
+    reasoning_quality: 0.8
+    hallucination_rate: 0.18
+    jailbreak_susceptibility: 0.3
+    compliance_bias: 0.74
+    latency_factor: 0.78
+    cost_factor: 0.55
   - key: nemotron_3_nano_30b_a3b
     capability: 0.22
-    safety_prior: 0.68
+    safety_prior: 0.75
     latency: 0.35
     cost: 0.45
     deployment_modes:
@@ -159,9 +231,15 @@ model_groups:
     - fp8
     - int8
     - int4
+    reasoning_quality: 0.86
+    hallucination_rate: 0.15
+    jailbreak_susceptibility: 0.27
+    compliance_bias: 0.77
+    latency_factor: 0.7
+    cost_factor: 0.48
   - key: nemotron_cascade_2_30b_a3b
     capability: 0.25
-    safety_prior: 0.68
+    safety_prior: 0.76
     latency: 0.42
     cost: 0.5
     deployment_modes:
@@ -172,10 +250,16 @@ model_groups:
     - fp8
     - int8
     - int4
+    reasoning_quality: 0.87
+    hallucination_rate: 0.14
+    jailbreak_susceptibility: 0.25
+    compliance_bias: 0.78
+    latency_factor: 0.72
+    cost_factor: 0.5
   edge_small:
   - key: qwen3_4b
     capability: 0.3
-    safety_prior: 0.64
+    safety_prior: 0.58
     latency: 0.2
     cost: 0.18
     deployment_modes:
@@ -188,9 +272,15 @@ model_groups:
     - int4
     real_model_id: Qwen/Qwen2.5-0.5B-Instruct
     real_model_note: small local smoke-test substitute
+    reasoning_quality: 0.66
+    hallucination_rate: 0.3
+    jailbreak_susceptibility: 0.45
+    compliance_bias: 0.62
+    latency_factor: 0.35
+    cost_factor: 0.18
   - key: gemma_4_e4b
     capability: 0.32
-    safety_prior: 0.7
+    safety_prior: 0.58
     latency: 0.2
     cost: 0.18
     deployment_modes:
@@ -203,9 +293,15 @@ model_groups:
     - int4
     real_model_id: Qwen/Qwen2.5-0.5B-Instruct
     real_model_note: small local smoke-test substitute
+    reasoning_quality: 0.64
+    hallucination_rate: 0.31
+    jailbreak_susceptibility: 0.43
+    compliance_bias: 0.63
+    latency_factor: 0.32
+    cost_factor: 0.16
   - key: ministral_3_3b
     capability: 0.18
-    safety_prior: 0.62
+    safety_prior: 0.54
     latency: 0.14
     cost: 0.08
     deployment_modes:
@@ -215,6 +311,12 @@ model_groups:
     - bf16
     - int8
     - int4
+    reasoning_quality: 0.61
+    hallucination_rate: 0.34
+    jailbreak_susceptibility: 0.48
+    compliance_bias: 0.6
+    latency_factor: 0.28
+    cost_factor: 0.14
   api_fast_cost:
   - key: gpt_5_4_mini
     provider: openai
@@ -227,6 +329,12 @@ model_groups:
     - api_hosted
     quantization_profiles:
     - managed
+    reasoning_quality: 0.86
+    hallucination_rate: 0.12
+    jailbreak_susceptibility: 0.18
+    compliance_bias: 0.84
+    latency_factor: 0.72
+    cost_factor: 0.55
   - key: gpt_5_4_nano
     provider: openai
     api_model: gpt-5.4-nano
@@ -238,3 +346,9 @@ model_groups:
     - api_hosted
     quantization_profiles:
     - managed
+    reasoning_quality: 0.76
+    hallucination_rate: 0.18
+    jailbreak_susceptibility: 0.28
+    compliance_bias: 0.76
+    latency_factor: 0.45
+    cost_factor: 0.25

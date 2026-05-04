@@ -14,6 +14,7 @@ from guardrail_gym.search.risk_objectives import (
     deployment_penalty,
 )
 from guardrail_gym.search.stack_scoring import score_stack_order, score_layer_diversity
+from guardrail_gym.search.model_behavior import apply_model_profile_to_payload
 from guardrail_gym.search.cognitive_coverage import cognitive_role_payload
 
 
@@ -75,6 +76,12 @@ def _extract_benchmark_risk_domains(benchmark, environment_name: str) -> list[st
 def evaluate_genotype(genotype: Genotype, benchmark, environment_name: str, config: dict | None = None) -> dict:
     config = config or {}
     payload = _score_stack(benchmark, environment_name, genotype.controls)
+    payload, model_behavior_info = apply_model_profile_to_payload(
+        payload,
+        genotype.base_model,
+        environment_name,
+        genotype.controls,
+    )
 
     vulnerability_factors = _extract_benchmark_vulnerability_factors(benchmark, environment_name)
     vulnerability_coverage = compute_vulnerability_coverage(genotype.controls, vulnerability_factors)
@@ -128,6 +135,7 @@ def evaluate_genotype(genotype: Genotype, benchmark, environment_name: str, conf
         "layer_diversity": round(layer_diversity, 6),
         "deployment_profile": deployment_profile,
         "quantization_profile": quantization_profile,
+        **model_behavior_info,
         **dep,
         "objective": round(objective, 6),
     }
