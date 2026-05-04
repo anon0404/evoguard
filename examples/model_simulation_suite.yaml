@@ -10,6 +10,8 @@ model_groups:
     - api_hosted
     quantization_profiles:
     - managed
+    provider: openai
+    api_model: gpt-5.4
   - key: gemini_3_1_pro_preview
     capability: 0.95
     safety_prior: 0.82
@@ -19,15 +21,8 @@ model_groups:
     - api_hosted
     quantization_profiles:
     - managed
-  - key: gpt_5_4_mini
-    capability: 0.82
-    safety_prior: 0.8
-    latency: 0.34
-    cost: 0.55
-    deployment_modes:
-    - api_hosted
-    quantization_profiles:
-    - managed
+    provider: google
+    api_model: gemini-3.1-pro-preview
   - key: gpt_5_5
     provider: openai
     api_model: gpt-5.5
@@ -35,6 +30,17 @@ model_groups:
     safety_prior: 0.88
     latency: 0.6
     cost: 0.78
+    deployment_modes:
+    - api_hosted
+    quantization_profiles:
+    - managed
+  - key: claude_sonnet_4_5
+    provider: anthropic
+    api_model: claude-sonnet-4-5
+    capability: 0.91
+    safety_prior: 0.84
+    latency: 0.55
+    cost: 0.62
     deployment_modes:
     - api_hosted
     quantization_profiles:
@@ -49,6 +55,8 @@ model_groups:
     - api_hosted
     quantization_profiles:
     - managed
+    provider: google
+    api_model: gemini-2.5-flash
   - key: mercury_2
     capability: 0.55
     safety_prior: 0.7
@@ -110,6 +118,8 @@ model_groups:
     - fp8
     - int8
     - int4
+    real_model_id: Qwen/Qwen2.5-0.5B-Instruct
+    real_model_note: small local smoke-test substitute
   - key: qwen3_5_35b_a3b
     capability: 0.62
     safety_prior: 0.68
@@ -176,6 +186,8 @@ model_groups:
     - bf16
     - int8
     - int4
+    real_model_id: Qwen/Qwen2.5-0.5B-Instruct
+    real_model_note: small local smoke-test substitute
   - key: gemma_4_e4b
     capability: 0.32
     safety_prior: 0.7
@@ -189,6 +201,8 @@ model_groups:
     - bf16
     - int8
     - int4
+    real_model_id: Qwen/Qwen2.5-0.5B-Instruct
+    real_model_note: small local smoke-test substitute
   - key: ministral_3_3b
     capability: 0.18
     safety_prior: 0.62

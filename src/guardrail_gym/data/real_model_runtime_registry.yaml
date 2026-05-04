@@ -1,0 +1,119 @@
+version: '0.1'
+runtime_models:
+  gpt_5_4:
+    provider: openai
+    api_model: gpt-5.4
+    env_key: OPENAI_API_KEY
+    adapter: openai
+    runnable_on: api
+  gpt_5_4_mini:
+    provider: openai
+    api_model: gpt-5.4-mini
+    env_key: OPENAI_API_KEY
+    adapter: openai
+    runnable_on: api
+  gpt_5_4_nano:
+    provider: openai
+    api_model: gpt-5.4-nano
+    env_key: OPENAI_API_KEY
+    adapter: openai
+    runnable_on: api
+  gpt_5_5:
+    provider: openai
+    api_model: gpt-5.5
+    env_key: OPENAI_API_KEY
+    adapter: openai
+    runnable_on: api
+  gemini_3_1_pro_preview:
+    provider: google
+    api_model: gemini-3.1-pro-preview
+    env_key: GEMINI_API_KEY
+    adapter: google
+    runnable_on: api
+  gemini_2_5_flash:
+    provider: google
+    api_model: gemini-2.5-flash
+    env_key: GEMINI_API_KEY
+    adapter: google
+    runnable_on: api
+  mercury_2:
+    provider: inception
+    api_model: mercury-2
+    env_key: INCEPTION_API_KEY
+    adapter: openai_compatible
+    base_url: https://api.inceptionlabs.ai/v1
+    runnable_on: api
+  mistral_small_4:
+    provider: mistral
+    api_model: mistral-small-latest
+    env_key: MISTRAL_API_KEY
+    adapter: openai_compatible
+    base_url: https://api.mistral.ai/v1
+    runnable_on: api
+  nemotron_3_super_120b_a12b:
+    provider: nvidia
+    api_model: nvidia/nemotron-3-super-120b-a12b
+    env_key: NVIDIA_API_KEY
+    adapter: openai_compatible
+    base_url: https://integrate.api.nvidia.com/v1
+    runnable_on: api_if_available
+  qwen3_next_80b_a3b:
+    provider: huggingface
+    real_model_id: Qwen/Qwen3-Next-80B-A3B-Instruct
+    env_key: HF_TOKEN
+    adapter: hf_local
+    runnable_on: gpu
+  qwen3_5_27b:
+    provider: huggingface
+    real_model_id: Qwen/Qwen2.5-0.5B-Instruct
+    env_key: HF_TOKEN
+    adapter: hf_local
+    runnable_on: colab_smoke_test
+  qwen3_5_35b_a3b:
+    provider: huggingface
+    real_model_id: Qwen/Qwen2.5-0.5B-Instruct
+    env_key: HF_TOKEN
+    adapter: hf_local
+    runnable_on: colab_smoke_test
+  gemma_4_26b_a4b:
+    provider: huggingface
+    real_model_id: Qwen/Qwen2.5-0.5B-Instruct
+    env_key: HF_TOKEN
+    adapter: hf_local
+    runnable_on: colab_smoke_test
+  nemotron_3_nano_30b_a3b:
+    provider: huggingface
+    real_model_id: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16
+    env_key: HF_TOKEN
+    adapter: hf_local
+    runnable_on: gpu
+  nemotron_cascade_2_30b_a3b:
+    provider: huggingface
+    real_model_id: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16
+    env_key: HF_TOKEN
+    adapter: hf_local
+    runnable_on: gpu
+  qwen3_4b:
+    provider: huggingface
+    real_model_id: Qwen/Qwen2.5-0.5B-Instruct
+    env_key: HF_TOKEN
+    adapter: hf_local
+    runnable_on: colab_smoke_test
+  gemma_4_e4b:
+    provider: huggingface
+    real_model_id: Qwen/Qwen2.5-0.5B-Instruct
+    env_key: HF_TOKEN
+    adapter: hf_local
+    runnable_on: colab_smoke_test
+  ministral_3_3b:
+    provider: huggingface
+    real_model_id: mistralai/Mistral-7B-Instruct-v0.3
+    env_key: HF_TOKEN
+    adapter: hf_local
+    runnable_on: gpu
+  claude_sonnet_4_5:
+    provider: anthropic
+    api_model: claude-sonnet-4-5
+    env_key: ANTHROPIC_API_KEY
+    adapter: anthropic
+    runnable_on: api

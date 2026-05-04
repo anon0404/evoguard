@@ -23,8 +23,11 @@ src/guardrail_gym/cli/__init__.py
 src/guardrail_gym/cli/main.py
 src/guardrail_gym/controls/__init__.py
 src/guardrail_gym/controls/registry.py
+src/guardrail_gym/data/__init__.py
+src/guardrail_gym/data/real_model_runtime_registry.yaml
 src/guardrail_gym/eval/__init__.py
 src/guardrail_gym/eval/complementarity.py
+src/guardrail_gym/eval/coverage.py
 src/guardrail_gym/eval/isolation.py
 src/guardrail_gym/eval/metrics.py
 src/guardrail_gym/eval/reports.py
@@ -45,6 +48,7 @@ src/guardrail_gym/models/hf_local_adapter.py
 src/guardrail_gym/models/mock.py
 src/guardrail_gym/models/mock_adapter.py
 src/guardrail_gym/models/openai_adapter.py
+src/guardrail_gym/models/runtime_registry.py
 src/guardrail_gym/profiles/__init__.py
 src/guardrail_gym/profiles/recommend.py
 src/guardrail_gym/profiles/schemas.py

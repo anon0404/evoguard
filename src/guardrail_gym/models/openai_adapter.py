@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import time
+import random
 
 from guardrail_gym.models.base import BaseModelAdapter, ModelResponse
 
@@ -28,10 +29,20 @@ class OpenAIModelAdapter(BaseModelAdapter):
         messages.append({"role": "user", "content": prompt})
 
         start = time.time()
-        resp = client.chat.completions.create(
-            model=self.model_name,
-            messages=messages,
-        )
+        last_error = None
+        resp = None
+        for attempt in range(3):
+            try:
+                resp = client.chat.completions.create(
+                    model=self.model_name,
+                    messages=messages,
+                )
+                break
+            except Exception as e:
+                last_error = e
+                time.sleep((2 ** attempt) + random.random())
+        if resp is None:
+            raise last_error
         elapsed = (time.time() - start) * 1000.0
 
         text = ""

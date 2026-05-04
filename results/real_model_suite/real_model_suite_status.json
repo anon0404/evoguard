@@ -1,0 +1,92 @@
+[
+  {
+    "model": "gemini_2_5_flash",
+    "status": "ok",
+    "count": 3
+  },
+  {
+    "model": "gemini_3_1_pro_preview",
+    "status": "ok",
+    "count": 3
+  },
+  {
+    "model": "gemma_4_26b_a4b",
+    "status": "skipped",
+    "count": 1
+  },
+  {
+    "model": "gemma_4_e4b",
+    "status": "error",
+    "count": 3
+  },
+  {
+    "model": "gpt_5_4",
+    "status": "error",
+    "count": 3
+  },
+  {
+    "model": "gpt_5_4_mini",
+    "status": "error",
+    "count": 6
+  },
+  {
+    "model": "gpt_5_4_nano",
+    "status": "error",
+    "count": 3
+  },
+  {
+    "model": "gpt_5_5",
+    "status": "error",
+    "count": 3
+  },
+  {
+    "model": "mercury_2",
+    "status": "skipped",
+    "count": 1
+  },
+  {
+    "model": "ministral_3_3b",
+    "status": "skipped",
+    "count": 1
+  },
+  {
+    "model": "mistral_small_4",
+    "status": "skipped",
+    "count": 1
+  },
+  {
+    "model": "nemotron_3_nano_30b_a3b",
+    "status": "skipped",
+    "count": 1
+  },
+  {
+    "model": "nemotron_3_super_120b_a12b",
+    "status": "skipped",
+    "count": 1
+  },
+  {
+    "model": "nemotron_cascade_2_30b_a3b",
+    "status": "skipped",
+    "count": 1
+  },
+  {
+    "model": "qwen3_4b",
+    "status": "error",
+    "count": 3
+  },
+  {
+    "model": "qwen3_5_27b",
+    "status": "error",
+    "count": 3
+  },
+  {
+    "model": "qwen3_5_35b_a3b",
+    "status": "skipped",
+    "count": 1
+  },
+  {
+    "model": "qwen3_next_80b_a3b",
+    "status": "skipped",
+    "count": 1
+  }
+]
