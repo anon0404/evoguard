@@ -21,6 +21,20 @@ BASE_CONFIGS = {
 
 OUT_DIR = Path("results/model_stack_simulations")
 
+MODEL_BEHAVIOR_FIELDS = [
+    "model_group",
+    "model_reasoning_quality",
+    "model_safety_prior",
+    "model_hallucination_rate",
+    "model_jailbreak_susceptibility",
+    "model_compliance_bias",
+    "model_latency_factor",
+    "model_cost_factor",
+    "residual_hallucination",
+    "residual_jailbreak",
+    "residual_noncompliance",
+]
+
 
 def flatten_models(suite: dict[str, Any]) -> list[dict[str, Any]]:
     out = []
@@ -58,10 +72,6 @@ def choose_quantization(model: dict[str, Any]) -> str:
     return "managed"
 
 
-def scenarios_for_environment(benchmark: BenchmarkSpec, env_name: str):
-    return benchmark.scenarios_for_environment(env_name)
-
-
 def main():
     benchmark = BenchmarkSpec.from_yaml(BENCHMARK)
     suite = yaml.safe_load(open(MODEL_SUITE, "r", encoding="utf-8"))
@@ -72,7 +82,7 @@ def main():
 
     for env, config_path in BASE_CONFIGS.items():
         base_config = yaml.safe_load(open(config_path, "r", encoding="utf-8"))
-        env_scenarios = scenarios_for_environment(benchmark, env)
+        env_scenarios = benchmark.scenarios_for_environment(env)
 
         for model in models:
             config = dict(base_config)
@@ -81,7 +91,6 @@ def main():
             config["deployment_profile"] = choose_deployment(model)
             config["quantization_profile"] = choose_quantization(model)
 
-            # Stable paper-simulation settings.
             config["population_size"] = int(config.get("population_size", 14))
             config["generations"] = int(config.get("generations", 8))
             config["elite_k"] = int(config.get("elite_k", 4))
@@ -119,6 +128,13 @@ def main():
                 "control_layers": genotype.get("control_layers", {}),
                 "activation_conditions": genotype.get("activation_conditions", {}),
             }
+
+            for field in MODEL_BEHAVIOR_FIELDS:
+                if field == "model_group":
+                    row[field] = best.get(field, model["group"])
+                else:
+                    row[field] = best.get(field)
+
             summary.append(row)
 
             out_path = OUT_DIR / f"{env}__{model['key'].replace('/', '_')}.json"
