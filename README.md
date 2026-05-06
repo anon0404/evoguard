@@ -63,7 +63,7 @@ The framework studies how different guardrail stacks should be composed around c
   Metrics include safety, compliance, utility, latency, cost, auditability, risk coverage, cognitive-role coverage, and stack coherence.
 
 - **Model-conditioned simulation**  
-  Evaluation across 17 model profiles spanning API, open-weight, and edge deployments.
+  Evaluation across 19 model profiles spanning API, open-weight, and edge deployments.
 
 ---
 
