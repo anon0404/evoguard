@@ -9,9 +9,9 @@
 
 **EvoGuard** is a research framework for studying how **guardrail architectures** should be composed around conversational AI systems operating in regulated and high-risk environments.
 
-This repository accompanies the anonymized submission:
+This repository accompanies the anonymised submission:
 
-> **EvoGuard: Neurogenetic Search of Guardrail Architectures for Risk-Aware Conversational AI Systems**
+> **EvoGuard: Neurogenetic Search of Guardrail Architectures for Regulated AI**
 
 ---
 
@@ -42,7 +42,7 @@ Modern conversational AI safety is not solely a property of the base model. In d
 EvoGuard introduces two linked components:
 
 1. **Guardrails Gym** — a benchmark layer for evaluating guardrail stacks across regulated conversational scenarios.
-2. **EvoGuard Search** — a neurogenetic search engine that evolves guardrail architectures under risk, deployment, and model-profile constraints.
+2. **EvoGuard** — a neurogenetic search engine that evolves guardrail architectures under risk, deployment, and model-profile constraints.
 
 The framework studies how different guardrail stacks should be composed around conversational systems as risk, autonomy, and deployment constraints increase.
 
@@ -197,7 +197,7 @@ These outputs support:
 
 - EvoGuard vs static guardrail baselines
 - environment-specific evolved guardrail stacks
-- 17-model simulation analysis
+- 19-model simulation analysis
 - vulnerability and risk-domain coverage analysis
 - stack-order and layer-diversity analysis
 - auditability, latency, cost, and deployment trade-off analysis
@@ -336,7 +336,7 @@ Model profiles are defined in:
 examples/model_simulation_suite.yaml
 ~~~
 
-The current suite contains 17 model profiles grouped into:
+The current suite contains 19 model profiles grouped into:
 
 - API frontier
 - API fast / cost-optimized
@@ -481,17 +481,6 @@ This repository maps directly to the paper structure:
 - **Experiments**: `scripts/run_model_stack_simulations.py`, `scripts/run_baseline_comparison.py`
 - **Results**: `results/tables/`, `results/plots/`
 
----
-
-## Limitations
-
-The primary results are simulation-based. Model profiles do not replace full live model behavior. Control effects and interactions are approximated through structured simulation rules.
-
-The framework is intended to support:
-
-- large-scale guardrail architecture search in simulation
-- controlled comparison across risk environments
-- subsequent validation on real model outputs
 
 ---
 
